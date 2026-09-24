@@ -1,0 +1,214 @@
+{
+  "rules-test": {
+    "cases": 24,
+    "completed": 24,
+    "errors": 0,
+    "completion_rate": 1.0,
+    "route_accuracy": 0.9167,
+    "review_accuracy": 0.9167,
+    "joint_accuracy": 0.875,
+    "joint_accuracy_all_cases": 0.875,
+    "route_accuracy_all_cases": 0.9167,
+    "review_accuracy_all_cases": 0.9167,
+    "route_macro_f1": 0.9188,
+    "review_brier": null,
+    "review_brier_cases": 0,
+    "route_brier_cases": 0,
+    "route_brier": null,
+    "latency_p50_ms": 0.01,
+    "latency_p95_ms": 0.02,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "jev_input_tokens": 0,
+    "jev_output_tokens": 0,
+    "by_language": {
+      "en": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 1.0,
+        "review_accuracy": 1.0
+      },
+      "pt": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 0.8333,
+        "review_accuracy": 0.8333
+      }
+    },
+    "by_path": {},
+    "confusion": {
+      "delivery->delivery": 6,
+      "billing->billing": 5,
+      "billing->manual": 1,
+      "technical->manual": 1,
+      "technical->technical": 5,
+      "manual->manual": 6
+    },
+    "error_types": {},
+    "jev_input_usd_per_million": 0.042,
+    "jev_input_cost_usd_estimate": 0.0
+  },
+  "ollama-test": {
+    "cases": 24,
+    "completed": 24,
+    "errors": 0,
+    "completion_rate": 1.0,
+    "route_accuracy": 0.5417,
+    "review_accuracy": 0.6667,
+    "joint_accuracy": 0.4583,
+    "joint_accuracy_all_cases": 0.4583,
+    "route_accuracy_all_cases": 0.5417,
+    "review_accuracy_all_cases": 0.6667,
+    "route_macro_f1": 0.562,
+    "review_brier": null,
+    "review_brier_cases": 0,
+    "route_brier_cases": 0,
+    "route_brier": null,
+    "latency_p50_ms": 354.97,
+    "latency_p95_ms": 403.96,
+    "input_tokens": 2490,
+    "output_tokens": 244,
+    "jev_input_tokens": 0,
+    "jev_output_tokens": 0,
+    "by_language": {
+      "en": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 0.6667,
+        "review_accuracy": 0.8333
+      },
+      "pt": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 0.4167,
+        "review_accuracy": 0.5
+      }
+    },
+    "by_path": {},
+    "confusion": {
+      "delivery->manual": 3,
+      "delivery->delivery": 3,
+      "billing->billing": 5,
+      "billing->manual": 1,
+      "technical->technical": 3,
+      "technical->manual": 3,
+      "manual->manual": 2,
+      "manual->billing": 2,
+      "manual->technical": 2
+    },
+    "error_types": {},
+    "jev_input_usd_per_million": 0.042,
+    "jev_input_cost_usd_estimate": 0.0
+  },
+  "jev-test": {
+    "cases": 24,
+    "completed": 24,
+    "errors": 0,
+    "completion_rate": 1.0,
+    "route_accuracy": 1.0,
+    "review_accuracy": 0.9167,
+    "joint_accuracy": 0.9167,
+    "joint_accuracy_all_cases": 0.9167,
+    "route_accuracy_all_cases": 1.0,
+    "review_accuracy_all_cases": 0.9167,
+    "route_macro_f1": 1.0,
+    "review_brier": 0.1026,
+    "review_brier_cases": 24,
+    "route_brier_cases": 24,
+    "route_brier": 0.0151,
+    "latency_p50_ms": 817.44,
+    "latency_p95_ms": 868.3,
+    "input_tokens": 10974,
+    "output_tokens": 1488,
+    "jev_input_tokens": 10974,
+    "jev_output_tokens": 1488,
+    "by_language": {
+      "en": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 1.0,
+        "review_accuracy": 0.9167
+      },
+      "pt": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 1.0,
+        "review_accuracy": 0.9167
+      }
+    },
+    "by_path": {},
+    "confusion": {
+      "delivery->delivery": 6,
+      "billing->billing": 6,
+      "technical->technical": 6,
+      "manual->manual": 6
+    },
+    "error_types": {},
+    "jev_input_usd_per_million": 0.042,
+    "jev_input_cost_usd_estimate": 0.00046091
+  },
+  "jev_gate-test": {
+    "cases": 24,
+    "completed": 24,
+    "errors": 0,
+    "completion_rate": 1.0,
+    "route_accuracy": 0.9167,
+    "review_accuracy": 0.875,
+    "joint_accuracy": 0.875,
+    "joint_accuracy_all_cases": 0.875,
+    "route_accuracy_all_cases": 0.9167,
+    "review_accuracy_all_cases": 0.875,
+    "route_macro_f1": 0.9161,
+    "review_brier": 0.0773,
+    "review_brier_cases": 19,
+    "route_brier_cases": 19,
+    "route_brier": 0.0003,
+    "latency_p50_ms": 850.4,
+    "latency_p95_ms": 1838.05,
+    "input_tokens": 11490,
+    "output_tokens": 1540,
+    "jev_input_tokens": 10974,
+    "jev_output_tokens": 1488,
+    "by_language": {
+      "en": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 0.9167,
+        "review_accuracy": 0.8333
+      },
+      "pt": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 0.9167,
+        "review_accuracy": 0.9167
+      }
+    },
+    "by_path": {
+      "jev": {
+        "cases": 19,
+        "route_accuracy": 1.0,
+        "review_accuracy": 0.9474,
+        "joint_accuracy": 0.9474,
+        "latency_p50_ms": 838.67
+      },
+      "jev_to_ollama": {
+        "cases": 5,
+        "route_accuracy": 0.6,
+        "review_accuracy": 0.6,
+        "joint_accuracy": 0.6,
+        "latency_p50_ms": 1684.27
+      }
+    },
+    "confusion": {
+      "delivery->delivery": 5,
+      "delivery->technical": 1,
+      "billing->billing": 6,
+      "technical->technical": 6,
+      "manual->manual": 5,
+      "manual->billing": 1
+    },
+    "error_types": {},
+    "jev_input_usd_per_million": 0.042,
+    "jev_input_cost_usd_estimate": 0.00046091
+  }
+}

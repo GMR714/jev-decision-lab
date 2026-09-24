@@ -1,0 +1,19 @@
+name: checks
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s test -v
+      - run: python -m compileall -q src
+      - run: python src/report.py results/rules-test.jsonl results/ollama-test.jsonl --out results/local-baselines.json
+      - run: python src/report.py results/rules-test.jsonl results/ollama-test.jsonl results/jev-test.jsonl results/jev_gate-test.jsonl > /dev/null

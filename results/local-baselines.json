@@ -1,0 +1,91 @@
+{
+  "rules-test": {
+    "cases": 24,
+    "completed": 24,
+    "errors": 0,
+    "completion_rate": 1.0,
+    "route_accuracy": 0.9167,
+    "review_accuracy": 0.9167,
+    "route_accuracy_all_cases": 0.9167,
+    "review_accuracy_all_cases": 0.9167,
+    "route_macro_f1": 0.9188,
+    "review_brier": null,
+    "route_brier": null,
+    "latency_p50_ms": 0.01,
+    "latency_p95_ms": 0.02,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "jev_input_tokens": 0,
+    "jev_output_tokens": 0,
+    "by_language": {
+      "en": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 1.0,
+        "review_accuracy": 1.0
+      },
+      "pt": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 0.8333,
+        "review_accuracy": 0.8333
+      }
+    },
+    "by_path": {},
+    "confusion": {
+      "delivery->delivery": 6,
+      "billing->billing": 5,
+      "billing->manual": 1,
+      "technical->manual": 1,
+      "technical->technical": 5,
+      "manual->manual": 6
+    },
+    "error_types": {}
+  },
+  "ollama-test": {
+    "cases": 24,
+    "completed": 24,
+    "errors": 0,
+    "completion_rate": 1.0,
+    "route_accuracy": 0.5417,
+    "review_accuracy": 0.6667,
+    "route_accuracy_all_cases": 0.5417,
+    "review_accuracy_all_cases": 0.6667,
+    "route_macro_f1": 0.562,
+    "review_brier": null,
+    "route_brier": null,
+    "latency_p50_ms": 354.97,
+    "latency_p95_ms": 403.96,
+    "input_tokens": 2490,
+    "output_tokens": 244,
+    "jev_input_tokens": 0,
+    "jev_output_tokens": 0,
+    "by_language": {
+      "en": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 0.6667,
+        "review_accuracy": 0.8333
+      },
+      "pt": {
+        "cases": 12,
+        "completed": 12,
+        "route_accuracy": 0.4167,
+        "review_accuracy": 0.5
+      }
+    },
+    "by_path": {},
+    "confusion": {
+      "delivery->manual": 3,
+      "delivery->delivery": 3,
+      "billing->billing": 5,
+      "billing->manual": 1,
+      "technical->technical": 3,
+      "technical->manual": 3,
+      "manual->manual": 2,
+      "manual->billing": 2,
+      "manual->technical": 2
+    },
+    "error_types": {}
+  }
+}
