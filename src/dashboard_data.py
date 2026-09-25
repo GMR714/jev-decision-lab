@@ -69,8 +69,13 @@ def build() -> str:
             if round(summary[label] * 24) != count:
                 raise ValueError(f"{arm}: {label} differs from the published summary")
 
-    threshold_hash = hashlib.sha256((ROOT / "results/gate-thresholds.json").read_bytes()).hexdigest()
-    if any(row["gate_thresholds_sha256"] != threshold_hash for row in runs["gate"].values()):
+    threshold_bytes = (ROOT / "results/gate-thresholds.json").read_bytes().replace(b"\r\n", b"\n")
+    # Git converts line endings across platforms; the recorded run hashed CRLF bytes.
+    threshold_hashes = {
+        hashlib.sha256(data).hexdigest()
+        for data in (threshold_bytes, threshold_bytes.replace(b"\n", b"\r\n"))
+    }
+    if any(row["gate_thresholds_sha256"] not in threshold_hashes for row in runs["gate"].values()):
         raise ValueError("Gate decisions do not match the frozen calibration file")
     gate_paths = [row["prediction"].get("path") for row in runs["gate"].values()]
     if gate_paths.count("jev") != 19 or gate_paths.count("jev_to_ollama") != 5:
