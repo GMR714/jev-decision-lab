@@ -4,6 +4,17 @@ A small benchmark for placing an atomic decision model in front of a generative 
 
 All 32 cases are hand-authored and fictional. Portuguese and English variants share a scenario family, and the family stays wholly in validation (8 cases) or test (24 cases). The corpus includes negation, multiple teams, missing details and instructions embedded inside a message. Its size makes it an engineering diagnostic, not an estimate of real-world accuracy.
 
+![Jev Decision Lab dashboard](results/dashboard.png)
+
+## Explore the decision ledger
+
+The [static decision ledger](docs/index.html) shows the four measured engines on identical test messages. It separates route and human-review accuracy, compares latency and Jev token use, and lets you inspect every prediction. Filters expose five fallbacks, one corrected decision and two regressions. The category breakdown groups 18 direct-route cases and two each with sparse detail, multiple teams or an instruction embedded in the ticket. These labels organize the display; they were not used to calibrate the gate.
+
+![Case-level gate regression](results/case-explorer.png)
+
+From the repository root, run `python -m http.server 8182 --bind 127.0.0.1` and open `http://127.0.0.1:8182/docs/`. The page reads frozen, checked-in results; it does not call Jev or run Qwen. `python src/dashboard_data.py --check` verifies that its case-level data match the recorded inputs, labels, predictions and published aggregates.
+
+The Jev-direct and Jev-gate arms made separate Jev calls. The direct arm's displayed probabilities therefore cannot explain every gate path; the gate's own path is taken from its recorded run.
 ## Measured comparison
 
 One authenticated run of the pinned `jev-1.13.0` model completed all 8 validation and 24 test cases without an API error. The [four-arm report](results/jev-comparison.json) uses identical test case IDs, labels and input hashes across engines. Half the test cases are in Portuguese and half in English.

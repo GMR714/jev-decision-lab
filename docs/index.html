@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Benchmark auditável de decisões Jev e fallback para LLM em tickets fictícios.">
+  <title>Jev Decision Lab — relatório de decisões</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio"><span class="brand-mark">J<span>/</span>D</span><strong>Jev Decision Lab</strong></a>
+    <nav aria-label="Navegação principal">
+      <a href="#resultado">Resultado</a><a href="#gate">Gate</a><a href="#casos">Casos</a>
+      <a class="source-link" href="https://github.com/GMR714/jev-decision-lab">Código ↗</a>
+    </nav>
+  </header>
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">ESTUDO 02 / DECISÃO ATÔMICA + FALLBACK</p>
+        <h1>Quando o gate melhora uma decisão?</h1>
+        <p class="lead">Um classificador escolhe a equipe e indica revisão humana. Um gate calibrado em validação decide se conserva a resposta ou consulta um LLM local. Este caderno mostra o destino de cada caso.</p>
+        <div class="hero-meta"><span>24 casos de teste</span><span>4 motores comparados</span><span>PT + EN</span></div>
+      </div>
+      <aside class="hero-finding">
+        <span class="finding-label">RESULTADO NESTA EXECUÇÃO</span>
+        <div><strong>22</strong><span>→</span><strong class="loss">21</strong><small>/ 24</small></div>
+        <p>Decisões completas corretas: Jev direto versus Jev com fallback. O gate encaminhou cinco casos e terminou pior neste conjunto.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="resultado">
+      <div class="section-head"><div><span class="section-number">01 / EVIDÊNCIA</span><h2>Mesmos casos, quatro caminhos</h2></div><p>Acerto completo exige rota e revisão humana corretas. Nenhum erro de chamada ocorreu nos 24 casos medidos.</p></div>
+      <div id="scorecards" class="scorecards"></div>
+      <div class="analysis-grid">
+        <article class="panel"><div class="panel-head"><h3>Acerto por dimensão</h3><span>n = 24 por motor</span></div><div id="dimension-chart"></div></article>
+        <article class="panel"><div class="panel-head"><h3>Operação medida</h3><span>Uma execução local</span></div><div id="operations-table"></div></article>
+      </div>
+      <div class="category-panel"><div class="panel-head"><h3>Acerto completo por tipo de caso</h3><span>Rótulos de análise · amostras pequenas</span></div><div id="category-breakdown"></div></div>`r`n      <p class="context-note">A regra por palavras-chave também foi forte neste corpus compacto. O tempo de regras exclui inicialização do processo; a latência da API inclui rede e máquina local. O conjunto é um diagnóstico de engenharia, não uma estimativa de desempenho em produção.</p>
+    </section>
+
+    <section class="section gate-section" id="gate">
+      <div class="section-head"><div><span class="section-number">02 / ARQUITETURA</span><h2>O ponto de decisão</h2></div><p>Os limiares vieram de oito casos de validação separados. O teste de 24 casos não participou da escolha.</p></div>
+      <div class="flow">
+        <div class="flow-step"><span class="flow-index">01</span><strong>Jev</strong><p>Choice para a rota; Noul para revisão. Uma requisição retorna ambas as decisões.</p></div>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <div class="flow-step"><span class="flow-index">02</span><strong>Gate</strong><p id="gate-rule"></p></div>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <div class="flow-step"><span class="flow-index">03</span><strong>Conservar ou consultar</strong><p>19 respostas Jev conservadas; cinco substituídas pela saída do Qwen local.</p></div>
+      </div>
+      <div class="gate-grid">
+        <article class="gate-tile"><span>Conservadas</span><strong>19 / 24</strong><p>18 decisões completas corretas</p></article>
+        <article class="gate-tile warn"><span>Fallback ao LLM</span><strong>5 / 24</strong><p>3 decisões completas corretas</p></article>
+        <article class="gate-tile"><span>Mudança líquida</span><strong>−1 caso</strong><p>1 correção de revisão; 2 rotas perdidas</p></article>
+      </div>
+      <p class="gate-note">A probabilidade de classe e a confiança reportada são registradas separadamente. A pontuação de Brier do gate cobre apenas as 19 decisões Jev conservadas; ela não resume os cinco fallbacks.</p>
+    </section>
+
+    <section class="section" id="casos">
+      <div class="section-head"><div><span class="section-number">03 / AUDITORIA</span><h2>Leia as decisões</h2></div><p>Os rótulos e previsões abaixo vêm dos artefatos congelados. Filtre por cenário, idioma e efeito do gate.</p></div>
+      <div class="filters">
+        <label>Categoria<select id="category-filter"><option value="all">Todas as categorias</option></select></label>
+        <label>Idioma<select id="language-filter"><option value="all">PT + EN</option><option value="pt">Português</option><option value="en">English</option></select></label>
+        <label>Efeito do gate<select id="effect-filter"><option value="all">Todos os efeitos</option><option value="fallback">Encaminhados ao LLM</option><option value="improved">Corrigidos pelo gate</option><option value="regressed">Piorados pelo gate</option><option value="jev_error">Erros do Jev</option></select></label>
+        <label class="search-label">Busca<input id="case-search" type="search" placeholder="ID ou trecho do ticket"></label>
+      </div>
+      <p id="case-count" class="case-count" aria-live="polite"></p>
+      <div class="case-layout"><div id="case-list" class="case-list"></div><article id="case-detail" class="case-detail" aria-live="polite"></article></div>
+    </section>
+  </main>
+  <footer><span>Jev Decision Lab / dados fictícios / execução registrada</span><div><a href="../results/jev-comparison.json">Métricas JSON</a><a href="../results/gate-thresholds.json">Calibração</a><a href="https://docs.typesafe.ai/primitives">Choice + Noul ↗</a></div></footer>
+  <script src="./report-data.js"></script>
+  <script src="./app.js?v=4"></script>
+</body>
+</html>

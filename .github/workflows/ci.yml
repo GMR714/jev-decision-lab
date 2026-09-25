@@ -17,3 +17,4 @@ jobs:
       - run: python -m compileall -q src
       - run: python src/report.py results/rules-test.jsonl results/ollama-test.jsonl --out results/local-baselines.json
       - run: python src/report.py results/rules-test.jsonl results/ollama-test.jsonl results/jev-test.jsonl results/jev_gate-test.jsonl > /dev/null
+      - run: python src/dashboard_data.py --check
